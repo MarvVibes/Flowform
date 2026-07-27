@@ -75,8 +75,8 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-5">
+    <header className="sticky top-0 z-30 border-b border-white/8 bg-[#07070C]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Logo />
         <div className="flex-1">{children}</div>
 
@@ -85,26 +85,26 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="relative rounded-full p-2 text-slate-500 hover:bg-slate-100 transition-all outline-none"
+                className="relative rounded-full p-2 text-white/40 hover:text-white hover:bg-white/8 transition-all outline-none"
                 aria-label="Owner notifications"
               >
-                <Bell className="h-5 w-5 text-slate-700" />
+                <Bell className="h-5 w-5" />
                 {unreadCount > 0 && (
-                  <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-sky-600 text-[10px] font-bold text-white shadow-sm">
+                  <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-violet-500 text-[10px] font-bold text-white shadow-sm">
                     {unreadCount}
                   </span>
                 )}
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[min(20rem,calc(100vw-1rem))] rounded-2xl p-2 shadow-xl">
-              <div className="flex items-center justify-between border-b border-slate-100 px-3 py-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                  <Inbox className="h-4 w-4 text-sky-600" /> Notifications & Alerts
+            <DropdownMenuContent align="end" className="w-[min(20rem,calc(100vw-2rem))] rounded-2xl p-2 shadow-xl bg-[#111118] border-white/10">
+              <div className="flex items-center justify-between border-b border-white/8 px-3 py-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                  <Inbox className="h-4 w-4 text-violet-400" /> Notifications
                 </span>
                 {unreadCount > 0 && (
                   <button
                     onClick={markAllRead}
-                    className="text-[11px] font-medium text-sky-600 hover:underline"
+                    className="text-[11px] font-medium text-violet-400 hover:underline"
                   >
                     Mark all read
                   </button>
@@ -115,14 +115,14 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                   <div
                     key={n.id}
                     className={`rounded-xl p-2.5 text-xs transition-colors ${
-                      n.read ? "bg-slate-50/50" : "bg-sky-50/60 border border-sky-100"
+                      n.read ? "bg-white/3" : "bg-violet-500/10 border border-violet-500/20"
                     }`}
                   >
-                    <div className="flex items-center justify-between font-bold text-slate-900">
+                    <div className="flex items-center justify-between font-bold text-white">
                       <span>{n.title}</span>
-                      <span className="text-[10px] text-slate-400 font-normal">{n.time}</span>
+                      <span className="text-[10px] text-white/30 font-normal">{n.time}</span>
                     </div>
-                    <p className="mt-1 text-slate-600 leading-relaxed">{n.message}</p>
+                    <p className="mt-1 text-white/50 leading-relaxed">{n.message}</p>
                   </div>
                 ))}
               </div>
@@ -136,24 +136,24 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                 className="rounded-full outline-offset-2 focus-visible:outline-2"
                 aria-label="Account menu"
               >
-                <Avatar className="h-8 w-8 border border-slate-200 shadow-sm">
-                  <AvatarFallback className="text-[12px] bg-slate-900 font-bold text-white">
+                <Avatar className="h-8 w-8 border border-white/15 shadow-sm">
+                  <AvatarFallback className="text-[12px] bg-white font-bold text-slate-900">
                     {(email[0] ?? "U").toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg">
-              <div className="truncate px-3 py-2 text-xs font-medium text-slate-500 border-b border-slate-100">
+            <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg bg-[#111118] border-white/10">
+              <div className="truncate px-3 py-2 text-xs font-medium text-white/40 border-b border-white/8">
                 {email}
               </div>
-              <DropdownMenuItem asChild className="rounded-lg">
+              <DropdownMenuItem asChild className="rounded-lg text-white/80 focus:text-white focus:bg-white/8">
                 <Link to="/dashboard">
                   <LayoutGrid className="h-4 w-4" />
                   Dashboard
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={signOut} className="rounded-lg text-rose-600">
+              <DropdownMenuItem onClick={signOut} className="rounded-lg text-rose-400 focus:text-rose-300 focus:bg-rose-500/10">
                 <LogOut className="h-4 w-4" />
                 Sign out
               </DropdownMenuItem>

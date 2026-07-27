@@ -308,6 +308,12 @@
 @layer base {
   * {
     border-color: var(--color-border);
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
@@ -315,6 +321,8 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   ::selection {
@@ -390,4 +398,48 @@
     animation: none;
   }
 }
+
+/* ---- Dark landing page utilities ---- */
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@utility aurora-bg {
+  background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 0% 60%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 100% 60%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+}
+
+@keyframes ff-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@utility animate-float {
+  animation: ff-float 3s ease-in-out infinite;
+}
+
+@keyframes ff-pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
+}
+
+@utility animate-pulse-glow {
+  animation: ff-pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Ensure images don't cause overflow */
+img {
+  max-width: 100%;
+}
+
+/* Ensure containers don't overflow on mobile */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 
