@@ -128,7 +128,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
     <div
 
       data-form-theme={activeTheme}
-      className="relative min-h-screen w-full overflow-hidden px-4 py-8 sm:px-8 sm:py-16 flex flex-col justify-between transition-colors duration-300"
+      className="relative min-h-[100dvh] w-full overflow-hidden px-4 py-6 sm:px-8 sm:py-16 flex flex-col justify-between transition-colors duration-300"
       style={{ background: "var(--form-bg)", color: "var(--form-ink)" }}
     >
       {/* Animated Mesh Glow Background Shapes */}
@@ -144,7 +144,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
       </div>
 
       {/* Top Header Controls */}
-      <div className="relative z-10 mx-auto w-full max-w-2xl flex flex-wrap items-center justify-between gap-3 mb-8 pb-4 border-b border-white/10 backdrop-blur-md">
+      <div className="relative z-10 mx-auto w-full max-w-2xl flex flex-wrap items-center justify-between gap-2 mb-5 pb-3 border-b border-white/10 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <span
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold shadow-sm"
@@ -155,7 +155,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
             }}
           >
             <Zap className="h-3.5 w-3.5 animate-bounce" style={{ color: "var(--form-accent)" }} />
-            Limited Registration — 12 Spots Remaining
+            <span className="hidden sm:inline">Limited Registration — </span>12 Spots Left
           </span>
         </div>
 
@@ -166,7 +166,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
           <button
             type="button"
             onClick={() => setMode("card")}
-            className="flex items-center gap-1.5 px-3.5 py-1 text-xs font-semibold rounded-full transition-all"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 text-xs font-semibold rounded-full transition-all"
             style={
               mode === "card"
                 ? { background: "var(--form-accent)", color: "var(--form-accent-ink)", boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }
@@ -174,12 +174,12 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
             }
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
-            Card Mode
+            <span className="hidden sm:inline">Card Mode</span>
           </button>
           <button
             type="button"
             onClick={() => setMode("scroll")}
-            className="flex items-center gap-1.5 px-3.5 py-1 text-xs font-semibold rounded-full transition-all"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1 text-xs font-semibold rounded-full transition-all"
             style={
               mode === "scroll"
                 ? { background: "var(--form-accent)", color: "var(--form-accent-ink)", boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }
@@ -187,7 +187,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
             }
           >
             <List className="h-3.5 w-3.5" />
-            Standard View
+            <span className="hidden sm:inline">List View</span>
           </button>
         </div>
       </div>
@@ -253,7 +253,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -16 }}
                   transition={{ duration: 0.3 }}
-                  className="p-8 backdrop-blur-xl border transition-all duration-300"
+                  className="p-4 sm:p-8 backdrop-blur-xl border transition-all duration-300"
                   style={{
                     background: "var(--form-panel)",
                     borderColor: "var(--form-border)",
@@ -312,12 +312,12 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
                     </p>
                   )}
 
-                  <div className="mt-8 flex items-center justify-between pt-5 border-t" style={{ borderColor: "var(--form-border)" }}>
+                  <div className="mt-6 sm:mt-8 flex items-center justify-between pt-4 sm:pt-5 border-t" style={{ borderColor: "var(--form-border)" }}>
                     <button
                       type="button"
                       onClick={handlePrevStep}
                       disabled={stepIndex === 0}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold disabled:opacity-40 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold disabled:opacity-40 transition-colors"
                       style={{ color: "var(--form-muted)" }}
                     >
                       <ArrowLeft className="h-4 w-4" />
@@ -328,7 +328,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
                       type="button"
                       onClick={handleNextStep}
                       disabled={submitting}
-                      className="inline-flex items-center gap-2 px-7 py-3 text-xs font-extrabold uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-7 sm:py-3 text-xs font-extrabold uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all"
                       style={{
                         background: "var(--form-accent)",
                         color: "var(--form-accent-ink)",
@@ -361,7 +361,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: Math.min(index * 0.04, 0.3) }}
-                className="p-6 backdrop-blur-xl border transition-all duration-300"
+                className="p-4 sm:p-6 backdrop-blur-xl border transition-all duration-300"
                 style={{
                   background: "var(--form-panel)",
                   borderColor: "var(--form-border)",
@@ -476,7 +476,7 @@ export function FormSurface({ form, onSubmit, submitting, preview }: Props) {
         </DialogContent>
       </Dialog>
 
-      <footer className="relative z-10 mt-12 text-center text-xs font-medium space-y-1" style={{ color: "var(--form-muted)" }}>
+      <footer className="relative z-10 mt-8 sm:mt-12 text-center text-xs font-medium space-y-1" style={{ color: "var(--form-muted)" }}>
         <p>Powered by <span className="font-bold" style={{ color: "var(--form-ink)" }}>FlowForm</span> — The modern form platform</p>
         <p className="text-[11px] opacity-75">Built by <span className="font-semibold">Marvelous Ndukwe</span></p>
       </footer>

@@ -125,7 +125,7 @@ function Landing() {
 
 function Hero({ signedIn, onStart }: { signedIn: boolean; onStart: () => void }) {
   return (
-    <section className="relative overflow-hidden border-b border-slate-200/80 py-16 lg:py-24">
+    <section className="relative overflow-hidden border-b border-slate-200/80 py-12 lg:py-24">
       {/* Subtle grid background pattern */}
       <div className="grid-paper pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(80%_80%_at_50%_20%,black,transparent)]" />
 
@@ -237,7 +237,7 @@ function PromptDemo() {
         </span>
       </div>
 
-      <div className="p-6 space-y-4">
+      <div className="p-4 sm:p-6 space-y-4">
         <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Your Prompt</p>
           <p className="mt-1.5 text-base font-medium text-slate-800 min-h-[28px] flex items-center">
@@ -307,7 +307,7 @@ function FieldMarquee() {
 
 function BentoGrid() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-24">
+    <section className="mx-auto max-w-6xl px-5 py-14 sm:py-24">
       <div className="max-w-2xl">
         <span className="text-xs font-bold uppercase tracking-widest text-sky-600">Built Different</span>
         <h2 className="font-display mt-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
@@ -501,7 +501,7 @@ function UniqueFeaturesSection() {
   ];
 
   return (
-    <section className="border-t border-slate-200/80 bg-white py-24">
+    <section className="border-t border-slate-200/80 bg-white py-14 sm:py-24">
       <div className="mx-auto max-w-6xl px-5">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-sky-600">Why FlowForm Wins</span>
@@ -538,7 +538,7 @@ function UniqueFeaturesSection() {
 function ClosingCta({ onStart }: { onStart: () => void }) {
   return (
     <section className="border-t border-slate-200/80 bg-[#FAF9F6]">
-      <div className="grid-paper py-28 text-center">
+      <div className="grid-paper py-16 sm:py-28 text-center">
         <div className="mx-auto max-w-3xl px-5">
           <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl leading-tight">
             Your next form is <br />

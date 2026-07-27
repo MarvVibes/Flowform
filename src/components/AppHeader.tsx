@@ -96,7 +96,7 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                 )}
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80 rounded-2xl p-2 shadow-xl">
+            <DropdownMenuContent align="end" className="w-[min(20rem,calc(100vw-1rem))] rounded-2xl p-2 shadow-xl">
               <div className="flex items-center justify-between border-b border-slate-100 px-3 py-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                   <Inbox className="h-4 w-4 text-sky-600" /> Notifications & Alerts

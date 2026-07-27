@@ -120,7 +120,7 @@ function Dashboard() {
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div className="min-w-0">
                 <p className="text-[12px] font-bold tracking-widest text-sky-600 uppercase">Workspace</p>
-                <h1 className="font-display mt-2 text-4xl font-extrabold tracking-tight">Your Forms</h1>
+                <h1 className="font-display mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight">Your Forms</h1>
                 <p className="mt-2 max-w-md text-[15px] text-muted-foreground">
                   {forms.length === 0
                     ? "Nothing here yet — start with AI, it's faster than a blank page."
@@ -144,7 +144,7 @@ function Dashboard() {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search forms..."
                     aria-label="Search forms"
-                    className="w-56 bg-card pl-9 rounded-full"
+                    className="w-full sm:w-56 bg-card pl-9 rounded-full"
                   />
                 </div>
                 <div className="flex rounded-full border border-border bg-card p-0.5 shadow-sm">
