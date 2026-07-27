@@ -12,6 +12,8 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 
+import { ThemeToggle } from "@/components/ThemeToggle";
+
 interface NotificationItem {
   id: string;
   title: string;
@@ -81,6 +83,8 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
         <div className="flex-1">{children}</div>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
+
           {/* Owner Notification Bell */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

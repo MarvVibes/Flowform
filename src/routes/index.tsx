@@ -20,7 +20,8 @@ import {
   TrendingUp,
   Globe,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { FIELD_TYPES, THEMES } from "@/lib/form-schema";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
@@ -108,8 +109,9 @@ function Landing() {
       {/* Top Navigation */}
       <header className="sticky top-0 z-40 border-b border-white/8 bg-[#07070C]/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-          <LogoDark />
+          <Logo />
           <nav className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             {signedIn ? (
               <Button asChild size="sm" className="rounded-full bg-white text-slate-900 hover:bg-white/90 px-4 sm:px-5 text-xs sm:text-sm">
                 <Link to="/dashboard">Open dashboard</Link>
@@ -142,7 +144,7 @@ function Landing() {
 
       <footer className="border-t border-white/8 bg-[#07070C]">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:px-6 py-10 sm:flex-row text-sm text-white/40">
-          <LogoDark />
+          <Logo />
           <div className="flex flex-col items-center sm:items-end gap-1">
             <p>© 2026 FlowForm. The easiest, most beautiful way to build a form.</p>
             <p className="text-xs text-white/25">Built by <span className="font-semibold text-white/50">Marvelous Ndukwe</span></p>
@@ -153,17 +155,7 @@ function Landing() {
   );
 }
 
-function LogoDark({ className }: { className?: string }) {
-  return (
-    <Link to="/" className={cn("group inline-flex items-center gap-2.5", className)} aria-label="FlowForm home">
-      <span className="relative flex h-7 w-7 items-center justify-center rounded-md bg-white">
-        <span className="absolute h-2.5 w-2.5 rounded-[2px] bg-slate-900 transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]" />
-        <span className="absolute h-2.5 w-2.5 translate-x-[4px] translate-y-[4px] rounded-[2px] bg-amber-400 transition-transform duration-300 group-hover:translate-x-[6px] group-hover:translate-y-[6px]" />
-      </span>
-      <span className="font-display text-[16px] text-white font-semibold">FlowForm</span>
-    </Link>
-  );
-}
+
 
 /* ---------------------------------- Hero --------------------------------- */
 
