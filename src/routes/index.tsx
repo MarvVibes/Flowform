@@ -309,19 +309,19 @@ function FieldMarquee() {
 
 function BentoGrid() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-14 sm:py-24">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-24">
       <div className="max-w-2xl">
         <span className="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Built Different</span>
-        <h2 className="font-display mt-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="font-display mt-2 text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Everything your form needs. <br />
           <span className="font-serif-italic text-sky-600 dark:text-sky-400 font-normal italic">Nothing it doesn't.</span>
         </h2>
-        <p className="mt-4 text-base text-slate-600 dark:text-white/60 leading-relaxed">
+        <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-600 dark:text-white/60 leading-relaxed">
           Google Forms gives you an old settings panel. FlowForm gives you a state-of-the-art form experience respondents actually love completing.
         </p>
       </div>
 
-      <div className="mt-14 grid auto-rows-[minmax(0,1fr)] gap-6 md:grid-cols-3">
+      <div className="mt-8 sm:mt-14 grid gap-4 sm:gap-6 md:grid-cols-3">
         <BentoTile className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-white to-sky-50/30 dark:from-white/5 dark:to-sky-500/5" icon={Palette} title="Editorial Themes & Typography">
           <p className="text-sm text-slate-600 dark:text-white/60 leading-relaxed">
             Minimal, Signature Flow, Midnight, Sunset, and Forest. Beautifully styled fonts, harmonious colors, and rounded corners tailored for every brand.
@@ -363,9 +363,9 @@ function BentoGrid() {
           <p className="text-sm text-slate-600 dark:text-white/60 leading-relaxed">
             One toggle turns your draft into a live, high-converting form with your personalized completion message.
           </p>
-          <div className="mt-4 flex items-center justify-between rounded-xl border border-sky-100 dark:border-sky-500/20 bg-sky-50/60 dark:bg-sky-500/10 px-4 py-3 font-mono text-xs text-sky-900 dark:text-sky-300 shadow-inner">
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-xl border border-sky-100 dark:border-sky-500/20 bg-sky-50/60 dark:bg-sky-500/10 px-3.5 sm:px-4 py-3 font-mono text-xs text-sky-900 dark:text-sky-300 shadow-inner">
             <span className="truncate font-semibold">flowform.app/f/rooftop-launch-party</span>
-            <span className="rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wider">
+            <span className="self-start sm:self-auto rounded-full bg-emerald-600 px-3 py-1 text-[11px] font-bold text-white uppercase tracking-wider">
               Live
             </span>
           </div>
@@ -393,14 +393,14 @@ function BentoTile({
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "group flex flex-col rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-white/4 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-200 dark:hover:border-sky-400/30",
+        "group flex flex-col rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-white/4 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-200 dark:hover:border-sky-400/30",
         className,
       )}
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 transition-transform duration-300 group-hover:scale-110">
         <Icon className="h-5 w-5" />
       </div>
-      <h3 className="font-display mt-5 text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
+      <h3 className="font-display mt-4 sm:mt-5 text-lg sm:text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
       <div className="mt-2 flex-1">{children}</div>
     </motion.article>
   );
@@ -412,8 +412,8 @@ function ThemePeek() {
   const theme = THEMES.find((t) => t.id === active) ?? THEMES[0];
 
   return (
-    <div className="mt-6">
-      <div className="flex flex-wrap gap-2">
+    <div className="mt-5 sm:mt-6">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2">
         {THEMES.map((t) => (
           <button
             key={t.id}
@@ -421,7 +421,7 @@ function ThemePeek() {
             onClick={() => setActive(t.id)}
             aria-pressed={active === t.id}
             className={cn(
-              "flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all",
+              "flex items-center gap-1.5 sm:gap-2 rounded-full border px-3 py-1 text-xs font-semibold transition-all",
               active === t.id
                 ? "border-sky-600 bg-sky-600 text-white shadow-md"
                 : "border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-700 dark:text-white/70 hover:border-slate-300 dark:hover:border-white/20",
@@ -443,7 +443,7 @@ function ThemePeek() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="mt-5 overflow-hidden border p-6 shadow-md"
+        className="mt-4 sm:mt-5 overflow-hidden border p-4 sm:p-6 shadow-md"
         style={{
           background: "var(--form-bg)",
           color: "var(--form-ink)",
@@ -451,18 +451,18 @@ function ThemePeek() {
           borderRadius: "calc(var(--form-radius) + 4px)",
         }}
       >
-        <p className="text-xl font-bold" style={{ fontFamily: "var(--form-display)" }}>
+        <p className="text-lg sm:text-xl font-bold" style={{ fontFamily: "var(--form-display)" }}>
           Rooftop Launch Party
         </p>
-        <p className="mt-1 text-sm" style={{ color: "var(--form-muted)" }}>
+        <p className="mt-1 text-xs sm:text-sm" style={{ color: "var(--form-muted)" }}>
           Tell us you're coming — takes 30 seconds.
         </p>
         <div
-          className="mt-4 h-10 w-full border"
+          className="mt-3 sm:mt-4 h-9 sm:h-10 w-full border"
           style={{ borderColor: "var(--form-border)", borderRadius: "var(--form-radius)", background: "var(--form-panel)" }}
         />
         <div
-          className="mt-4 inline-flex px-5 py-2.5 text-xs font-bold uppercase tracking-wider"
+          className="mt-3 sm:mt-4 inline-flex px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-bold uppercase tracking-wider"
           style={{
             background: "var(--form-accent)",
             color: "var(--form-accent-ink)",
@@ -503,16 +503,16 @@ function UniqueFeaturesSection() {
   ];
 
   return (
-    <section className="border-t border-slate-200/80 dark:border-white/8 bg-white dark:bg-[#07070C] py-14 sm:py-24">
-      <div className="mx-auto max-w-6xl px-5">
+    <section className="border-t border-slate-200/80 dark:border-white/8 bg-white dark:bg-[#07070C] py-10 sm:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400">Why FlowForm Wins</span>
-          <h2 className="font-display mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="font-display mt-2 text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Features Google Forms <span className="font-serif-italic text-sky-600 dark:text-sky-400 font-normal italic">doesn't have</span>
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 sm:mt-14 grid gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {uniqueFeatures.map((f, i) => (
             <motion.div
               key={f.title}
@@ -520,13 +520,13 @@ function UniqueFeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50/60 dark:bg-white/4 p-6 transition-all hover:bg-white dark:hover:bg-white/8 hover:shadow-lg hover:border-sky-200 dark:hover:border-sky-400/30"
+              className="rounded-2xl border border-slate-100 dark:border-white/8 bg-slate-50/60 dark:bg-white/4 p-5 sm:p-6 transition-all hover:bg-white dark:hover:bg-white/8 hover:shadow-lg hover:border-sky-200 dark:hover:border-sky-400/30"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-600 text-white shadow-md">
-                <f.icon className="h-6 w-6" />
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-sky-600 text-white shadow-md">
+                <f.icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-              <h3 className="mt-5 text-lg font-bold text-slate-900 dark:text-white">{f.title}</h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-white/60 leading-relaxed">{f.desc}</p>
+              <h3 className="mt-4 sm:mt-5 text-base sm:text-lg font-bold text-slate-900 dark:text-white">{f.title}</h3>
+              <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-white/60 leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -540,21 +540,21 @@ function UniqueFeaturesSection() {
 function ClosingCta({ onStart }: { onStart: () => void }) {
   return (
     <section className="border-t border-slate-200/80 dark:border-white/8 bg-[#FAF9F6] dark:bg-[#07070C]">
-      <div className="grid-paper py-16 sm:py-28 text-center">
-        <div className="mx-auto max-w-3xl px-5">
-          <h2 className="font-display text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl leading-tight">
+      <div className="grid-paper py-12 sm:py-28 text-center">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
             Your next form is <br />
             <span className="font-serif-italic text-sky-600 dark:text-sky-400 font-normal italic">one sentence</span> away.
           </h2>
-          <p className="mt-4 text-base text-slate-600 dark:text-white/60">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-600 dark:text-white/60">
             Join thousands creating beautiful forms with zero effort.
           </p>
           <button
             onClick={onStart}
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white px-9 py-4 text-base font-semibold text-white dark:text-slate-950 shadow-2xl transition-all hover:bg-slate-800 dark:hover:bg-white/90 hover:scale-105"
+            className="mt-6 sm:mt-8 inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-white px-7 sm:px-9 py-3.5 sm:py-4 text-sm sm:text-base font-semibold text-white dark:text-slate-950 shadow-2xl transition-all hover:bg-slate-800 dark:hover:bg-white/90 hover:scale-105"
           >
             <span>Start building now</span>
-            <ArrowRight className="h-5 w-5" />
+            <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
       </div>

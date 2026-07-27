@@ -432,14 +432,19 @@
   animation: ff-pulse-glow 2.5s ease-in-out infinite;
 }
 
-/* Ensure images don't cause overflow */
-img {
+/* Ensure images, SVG, and media containers never overflow screen edge */
+img, svg, iframe, video, embed, object {
   max-width: 100%;
 }
 
 /* Ensure containers don't overflow on mobile */
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+/* Prevent flex and grid items from expanding beyond parent width */
+.grid > *, .flex > * {
+  min-width: 0;
 }
 
 

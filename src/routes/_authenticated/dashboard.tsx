@@ -116,7 +116,7 @@ function Dashboard() {
 
       <section className="border-b border-border bg-[#FAF9F6] dark:bg-[#0D131F]">
         <div className="ruled-paper">
-          <div className="mx-auto max-w-6xl px-5 py-10">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
               <div className="min-w-0">
                 <p className="text-[12px] font-bold tracking-widest text-sky-600 dark:text-sky-400 uppercase">Workspace</p>
@@ -182,7 +182,7 @@ function Dashboard() {
         </div>
       </section>
 
-      <main className="mx-auto max-w-6xl px-5 py-10">
+      <main className="mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10">
         {formsQuery.isLoading ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[0, 1, 2].map((i) => (
@@ -249,9 +249,9 @@ function Dashboard() {
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="min-w-28 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-card px-5 py-3.5 shadow-sm text-center">
-      <p className="font-display text-2xl font-bold leading-none text-slate-900 dark:text-white">{value}</p>
-      <p className="mt-1.5 text-[11px] font-bold tracking-widest text-slate-400 dark:text-muted-foreground uppercase">{label}</p>
+    <div className="flex-1 min-w-[90px] sm:min-w-28 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-card px-3 sm:px-5 py-3 sm:py-3.5 shadow-sm text-center">
+      <p className="font-display text-xl sm:text-2xl font-bold leading-none text-slate-900 dark:text-white">{value}</p>
+      <p className="mt-1 sm:mt-1.5 text-[10px] sm:text-[11px] font-bold tracking-widest text-slate-400 dark:text-muted-foreground uppercase">{label}</p>
     </div>
   );
 }
@@ -276,7 +276,7 @@ function FormCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.25, delay: Math.min(index * 0.04, 0.25) }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-200 dark:hover:border-sky-400/30"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-card p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-sky-200 dark:hover:border-sky-400/30"
     >
       <span
         aria-hidden
