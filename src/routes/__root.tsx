@@ -128,7 +128,8 @@ function RootShell({ children }: { children: ReactNode }) {
         <Scripts />
       </body>
     </html>
-import { ThemeProvider } from "@/components/ThemeProvider";
+  );
+}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
