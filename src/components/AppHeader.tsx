@@ -77,7 +77,7 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/8 bg-[#07070C]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <Logo />
         <div className="flex-1">{children}</div>
@@ -89,7 +89,7 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="relative rounded-full p-2 text-white/40 hover:text-white hover:bg-white/8 transition-all outline-none"
+                className="relative rounded-full p-2 text-muted-foreground hover:text-foreground hover:bg-accent transition-all outline-none"
                 aria-label="Owner notifications"
               >
                 <Bell className="h-5 w-5" />
@@ -100,9 +100,9 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                 )}
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[min(20rem,calc(100vw-2rem))] rounded-2xl p-2 shadow-xl bg-[#111118] border-white/10">
-              <div className="flex items-center justify-between border-b border-white/8 px-3 py-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+            <DropdownMenuContent align="end" className="w-[min(20rem,calc(100vw-2rem))] rounded-2xl p-2 shadow-xl bg-popover border-border">
+              <div className="flex items-center justify-between border-b border-border px-3 py-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
                   <Inbox className="h-4 w-4 text-violet-400" /> Notifications
                 </span>
                 {unreadCount > 0 && (
@@ -119,14 +119,14 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                   <div
                     key={n.id}
                     className={`rounded-xl p-2.5 text-xs transition-colors ${
-                      n.read ? "bg-white/3" : "bg-violet-500/10 border border-violet-500/20"
+                      n.read ? "bg-muted/50" : "bg-violet-500/10 border border-violet-500/20"
                     }`}
                   >
-                    <div className="flex items-center justify-between font-bold text-white">
+                    <div className="flex items-center justify-between font-bold text-foreground">
                       <span>{n.title}</span>
-                      <span className="text-[10px] text-white/30 font-normal">{n.time}</span>
+                      <span className="text-[10px] text-muted-foreground font-normal">{n.time}</span>
                     </div>
-                    <p className="mt-1 text-white/50 leading-relaxed">{n.message}</p>
+                    <p className="mt-1 text-muted-foreground leading-relaxed">{n.message}</p>
                   </div>
                 ))}
               </div>
@@ -140,24 +140,24 @@ export function AppHeader({ children }: { children?: React.ReactNode }) {
                 className="rounded-full outline-offset-2 focus-visible:outline-2"
                 aria-label="Account menu"
               >
-                <Avatar className="h-8 w-8 border border-white/15 shadow-sm">
-                  <AvatarFallback className="text-[12px] bg-white font-bold text-slate-900">
+                <Avatar className="h-8 w-8 border border-border shadow-sm">
+                  <AvatarFallback className="text-[12px] bg-primary font-bold text-primary-foreground">
                     {(email[0] ?? "U").toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg bg-[#111118] border-white/10">
-              <div className="truncate px-3 py-2 text-xs font-medium text-white/40 border-b border-white/8">
+            <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg bg-popover border-border">
+              <div className="truncate px-3 py-2 text-xs font-medium text-muted-foreground border-b border-border">
                 {email}
               </div>
-              <DropdownMenuItem asChild className="rounded-lg text-white/80 focus:text-white focus:bg-white/8">
+              <DropdownMenuItem asChild className="rounded-lg text-foreground focus:text-accent-foreground focus:bg-accent">
                 <Link to="/dashboard">
                   <LayoutGrid className="h-4 w-4" />
                   Dashboard
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={signOut} className="rounded-lg text-rose-400 focus:text-rose-300 focus:bg-rose-500/10">
+              <DropdownMenuItem onClick={signOut} className="rounded-lg text-rose-500 focus:text-rose-600 focus:bg-rose-50 dark:text-rose-400 dark:focus:text-rose-300 dark:focus:bg-rose-500/10">
                 <LogOut className="h-4 w-4" />
                 Sign out
               </DropdownMenuItem>
