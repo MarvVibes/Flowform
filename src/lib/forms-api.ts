@@ -193,6 +193,11 @@ export async function createForm(input?: Partial<FormRecord>): Promise<FormRecor
           slug: newForm.slug,
           theme: newForm.theme,
           fields: newForm.fields as never,
+          published: newForm.published,
+          success_title: newForm.success_title,
+          success_message: newForm.success_message,
+          notify_owner: newForm.notify_owner,
+          send_confirmation: newForm.send_confirmation,
         })
         .select("*")
         .single();
