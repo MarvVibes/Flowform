@@ -18,8 +18,9 @@ export interface PublicForm {
 export const getPublicFormBySlug = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => z.object({ slug: z.string().trim().min(1).max(120) }).parse(input))
   .handler(async ({ data }): Promise<PublicForm | null> => {
-    const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
-    const supabase = createClient<Database>(process.env.SUPABASE_URL!, key, {
+    const key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY || "";
+    const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || import.meta.env?.VITE_SUPABASE_URL || "";
+    const supabase = createClient<Database>(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
       global: {
         fetch: (input, init) => {
@@ -33,14 +34,15 @@ export const getPublicFormBySlug = createServerFn({ method: "GET" })
       },
     });
 
-    const { data: row, error } = await supabase
+    const { data: rows, error } = await supabase
       .from("forms")
       .select("id, slug, title, description, theme, fields, cover_url")
       .eq("slug", data.slug)
       .eq("published", true)
-      .maybeSingle();
+      .limit(1);
 
     if (error) throw new Error("Could not load this form.");
+    const row = rows?.[0];
     if (!row) return null;
 
     const coverPath = (row as { cover_url?: string | null }).cover_url ?? null;

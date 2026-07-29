@@ -150,9 +150,9 @@ export async function getPublicForm(slug: string): Promise<FormRecord | null> {
       .select("*")
       .eq("slug", slug)
       .eq("published", true)
-      .maybeSingle();
+      .limit(1);
     if (error) throw error;
-    if (data) return normalize(data as RawForm);
+    if (data && data.length > 0) return normalize(data[0] as RawForm);
   } catch {
     /* ignore */
   }

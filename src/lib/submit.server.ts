@@ -20,12 +20,14 @@ interface FieldLike {
 export async function submitToForm(input: SubmitInput) {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-  const { data: form, error } = await supabaseAdmin
+  const { data: rows, error } = await supabaseAdmin
     .from("forms")
     .select("*")
     .eq("slug", input.slug)
     .eq("published", true)
-    .maybeSingle();
+    .limit(1);
+
+  const form = rows?.[0];
 
   if (error) throw new Error("Could not load this form.");
   if (!form) throw new Error("This form is no longer accepting responses.");
