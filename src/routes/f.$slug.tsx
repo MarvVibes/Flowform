@@ -1,21 +1,21 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 import { Check } from "lucide-react";
 import { FormSurface } from "@/components/form/FormSurface";
 import { getPublicFormBySlug } from "@/lib/public-form.functions";
+import { getPublicForm } from "@/lib/forms-api";
 import { submitResponse } from "@/lib/submit.functions";
 import type { FormField, ThemeId } from "@/lib/form-schema";
 
 export const Route = createFileRoute("/f/$slug")({
   loader: async ({ params }) => {
     const form = await getPublicFormBySlug({ data: { slug: params.slug } });
-    if (!form) throw notFound();
-    return { form };
+    return { form, slug: params.slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) {
+    if (!loaderData || !loaderData.form) {
       return {
         meta: [{ title: "Form unavailable — FlowForm" }, { name: "robots", content: "noindex" }],
       };
@@ -31,12 +31,6 @@ export const Route = createFileRoute("/f/$slug")({
       ],
     };
   },
-  notFoundComponent: () => (
-    <Centered
-      title="This form isn't available"
-      body="The link may be wrong, or the form is no longer accepting responses."
-    />
-  ),
   errorComponent: () => (
     <Centered title="This form didn't load" body="Please refresh the page and try again." />
   ),
@@ -44,9 +38,42 @@ export const Route = createFileRoute("/f/$slug")({
 });
 
 function PublicForm() {
-  const { form } = Route.useLoaderData();
+  const { form: serverForm, slug } = Route.useLoaderData();
+  const [form, setForm] = useState(serverForm);
+  const [notFoundLocal, setNotFoundLocal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState<{ title: string; message: string } | null>(null);
+
+  useEffect(() => {
+    if (!serverForm) {
+      getPublicForm(slug).then((localForm) => {
+        if (localForm) {
+          // Normalize to PublicForm format since getPublicForm returns FormRecord
+          setForm({
+            id: localForm.id,
+            slug: localForm.slug,
+            title: localForm.title,
+            description: localForm.description,
+            theme: localForm.theme,
+            fields: localForm.fields,
+            coverUrl: localForm.cover_url,
+            success_title: localForm.success_title,
+            success_message: localForm.success_message,
+          } as any);
+        } else {
+          setNotFoundLocal(true);
+        }
+      });
+    }
+  }, [serverForm, slug]);
+
+  if (notFoundLocal) {
+    return <Centered title="This form isn't available" body="The link may be wrong, or the form is no longer accepting responses." />;
+  }
+
+  if (!form) {
+    return <Centered title="Loading..." body="Please wait while we find this form." />;
+  }
 
   if (done) {
     return (
@@ -104,6 +131,18 @@ function PublicForm() {
         onSubmit={async (answers) => {
           setSubmitting(true);
           try {
+            if (notFoundLocal === false && serverForm === null) {
+              // We loaded this form from local storage, so save response locally
+              const { saveLocalResponseDirect } = await import("@/lib/forms-api");
+              saveLocalResponseDirect(form.id, answers);
+              setSubmitting(false);
+              setDone({ 
+                title: (form as any).success_title || "Response received!", 
+                message: (form as any).success_message || "Thank you for completing this form." 
+              });
+              return;
+            }
+
             const result = await submitResponse({
               data: { slug: form.slug, answers },
             });
