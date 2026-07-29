@@ -119,15 +119,20 @@ export async function getFlyerUrl(path: string | null): Promise<string | null> {
 }
 
 export async function listForms(): Promise<FormRecord[]> {
+  const localForms = getLocalForms();
   try {
     const { data, error } = await supabase
       .from("forms")
       .select("*")
       .order("updated_at", { ascending: false });
     if (error || !data) throw error;
-    return (data as RawForm[]).map(normalize);
+    const serverForms = (data as RawForm[]).map(normalize);
+    // Merge: server forms take priority. Add any local forms whose id doesn't exist on server.
+    const serverIds = new Set(serverForms.map((f) => f.id));
+    const localOnly = localForms.filter((f) => !serverIds.has(f.id));
+    return [...serverForms, ...localOnly];
   } catch {
-    return getLocalForms();
+    return localForms;
   }
 }
 
@@ -171,7 +176,7 @@ export async function createForm(input?: Partial<FormRecord>): Promise<FormRecor
     theme: input?.theme ?? "signature",
     fields: input?.fields ?? [],
     cover_url: input?.cover_url ?? null,
-    published: true,
+    published: false,
     success_title: "Response received!",
     success_message: "Thank you for completing this form.",
     notify_owner: true,

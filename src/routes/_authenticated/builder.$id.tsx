@@ -36,7 +36,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { improveQuestion } from "@/lib/ai.functions";
 import { useFlyerUrl } from "@/hooks/use-flyer-url";
 
-import { THEMES, createField, newFieldId, type FieldType, type FormField, type ThemeId } from "@/lib/form-schema";
+import { THEMES, createField, newFieldId, slugify, type FieldType, type FormField, type ThemeId } from "@/lib/form-schema";
 import { getForm, updateForm, type FormRecord } from "@/lib/forms-api";
 import { cn } from "@/lib/utils";
 
@@ -177,10 +177,22 @@ function Builder() {
           <div className="min-w-0 flex-1">
             <input
               value={draft.title}
-              onChange={(e) => patch({ title: e.target.value })}
+              onChange={(e) => {
+                const newTitle = e.target.value;
+                // Regenerate slug when title changes so the URL reflects the form name
+                const newSlug = slugify(newTitle || "form");
+                patch({ title: newTitle, slug: newSlug });
+              }}
+              onBlur={(e) => {
+                // On blur, ensure slug is saved if title is empty fallback to "form"
+                if (!e.target.value.trim()) {
+                  patch({ title: "Untitled form", slug: slugify("form") }, true);
+                }
+              }}
               aria-label="Form title"
               maxLength={120}
-              className="w-full truncate bg-transparent text-2xl font-semibold tracking-tight outline-none"
+              className="w-full truncate bg-transparent text-2xl font-semibold tracking-tight outline-none placeholder:text-muted-foreground/50"
+              placeholder="Your form title..."
             />
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -201,9 +213,19 @@ function Builder() {
             <Button
               size="sm"
               variant={draft.published ? "secondary" : "default"}
-              onClick={() => {
-                patch({ published: !draft.published }, true);
-                toast.success(draft.published ? "Form unpublished" : "Your form is live");
+              className={draft.published ? "" : "bg-emerald-600 hover:bg-emerald-700 text-white"}
+              onClick={async () => {
+                const willPublish = !draft.published;
+                await patch({ published: willPublish }, true);
+                if (willPublish) {
+                  const liveUrl = `${window.location.origin}/f/${draft.slug}`;
+                  toast.success(
+                    `🎉 Your form is live! Shareable link: ${liveUrl}`,
+                    { duration: 5000 }
+                  );
+                } else {
+                  toast.success("Form unpublished — it's now a draft.");
+                }
               }}
             >
               <Globe className="h-4 w-4" />
